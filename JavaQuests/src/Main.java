@@ -1,6 +1,23 @@
 import java.util.Scanner;
 
 public class Main {
+
+//    For 3 and 4 quests
+//    private static void docs() {
+//        System.out.println("Invalid input\n" +
+//                "\n" +
+//                "This program calculates apples which each student will get. " +
+//                "First enter number of students and then number of apples!");
+//    }
+//
+//    private static int calcApples(int n, int k) {
+//        return (k / n);
+//    }
+//
+//    private static int calcRemaining(int n, int k) {
+//        return (k % n);
+//    }
+
     public static void main(String[] args) {
 
 
@@ -27,7 +44,32 @@ public class Main {
 //        System.out.println("The previous number " + a + " is " + c);
 
 
-
-
+//           Quests #3 and 4
+//        int n = -1;
+//        int k = -1;
+//
+//        try {
+//            n = Integer.parseInt(args[0]);
+//            k = Integer.parseInt(args[1]);
+//        } catch (Exception e) {
+//            docs();
+//            return;
+//        }
+//
+//
+//        if (args.length != 2) {
+//            docs();
+//            return;
+//
+//        }
+//        int resultthree = calcApples(n, k);
+//        System.out.println(resultthree);
+//
+//        int resultfour = calcRemaining(n, k);
+//        System.out.println(resultfour);
+//
+//
     }
+
+
 }
