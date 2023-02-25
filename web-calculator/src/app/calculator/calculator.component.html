@@ -1,0 +1,16 @@
+<!--use angular material form field to make input prettier-->
+<mat-form-field appearance="outline">
+<!--  Add label to form-->
+  <mat-label>Math</mat-label>
+<!--  user inputs here, we show place folder and bind to form control-->
+  <input matInput [formControl]="math" placeholder="+ 2 2">
+<!--  here is a button start calculations-->
+  <button mat-icon-button matSuffix (click)="calculate()">
+<!--  next add an icon to make it prettier-->
+    <mat-icon color="primary">calculate</mat-icon>
+  </button>
+<!--  error if nothing is input it-->
+  <mat-error *ngIf="math.invalid">Enter math</mat-error>
+</mat-form-field>
+<!--show calculation result-->
+<p>Result: {{value}}</p>
