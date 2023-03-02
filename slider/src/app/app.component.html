@@ -1,0 +1,7 @@
+<mat-slider [min]="0" [max]="pages.length - 1" [step]="1">
+  <input matSliderThumb [(ngModel)]="currentPage">
+</mat-slider>
+<mat-tab-group [selectedIndex]="currentPage">
+  <mat-tab disabled [label]="page.name" *ngFor="let page of pages">{{page.content}}</mat-tab>
+</mat-tab-group>
+
