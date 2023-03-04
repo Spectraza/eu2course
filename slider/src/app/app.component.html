@@ -1,7 +1,11 @@
-<mat-slider [min]="0" [max]="pages.length - 1" [step]="1">
+<mat-slider [min]="0" [max]="pages.length - 1" [step]="1"> 
   <input matSliderThumb [(ngModel)]="currentPage">
 </mat-slider>
 <mat-tab-group [selectedIndex]="currentPage">
   <mat-tab disabled [label]="page.name" *ngFor="let page of pages">{{page.content}}</mat-tab>
 </mat-tab-group>
 
+
+<!-- the max size depends on how many tabs we have in massive -->
+<!-- next code uses the ngmodel currentpage. In ts file, it has 0. it is created for mat tab group as index -->
+<!-- so in mat tab it shows us label (the name of page), and content -->
