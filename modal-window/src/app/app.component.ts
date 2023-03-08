@@ -43,7 +43,7 @@ export class DialogDataTest{
 
   increment_counter() {
     this.counter++;
-    if (this.counter === 12){
+    if (this.counter === 15){
       clearInterval(this.intervalId)
       this.intervalId = null;
     }
