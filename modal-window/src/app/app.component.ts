@@ -17,6 +17,7 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog) {}
 
+//   function of opening modal dialog
   openDialog() {
     this.dialog.open(DialogDataTest, {
       data: {
@@ -35,12 +36,14 @@ export class DialogDataTest{
   intervalId: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  
+//  create a function to start counting after clicking on button
   start_counter(){
     if (this.intervalId === null) return this.intervalId;
     this.intervalId = setInterval(() => this.increment_counter(), 1000);
   }
 
-
+// when counter reaching a number 15, it will stop
   increment_counter() {
     this.counter++;
     if (this.counter === 15){
