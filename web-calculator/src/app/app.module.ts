@@ -9,21 +9,23 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatorComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    DragDropModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        DragDropModule,
+        ReactiveFormsModule,
+        MatButtonToggleModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
