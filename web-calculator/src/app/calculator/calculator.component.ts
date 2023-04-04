@@ -19,6 +19,8 @@ export class CalculatorComponent implements OnInit {
   // this will convert input to tree
   parser = new TreeParser();
 
+  formula: string = '+ 2 2';
+
   constructor() {
   }
 
@@ -28,15 +30,22 @@ export class CalculatorComponent implements OnInit {
   // calculate math
   calculate() {
     // calculate only if math is valid
-    if (this.math.valid) {
 
-      // get each element
-      let elements = this.math.value.split(' ').reverse();
-      // parse elements into root-node
-      let tree = this.parser.parse(elements);
-      // calculate tree
-      this.value = tree.calculate();
-    }
+
+    // get each element
+    let elements = this.formula.split(' ').reverse();
+    // parse elements into root-node
+    let tree = this.parser.parse(elements);
+    // calculate tree
+    this.value = tree.calculate();
+
+
   };
+
+  remember() {
+    if (this.math.valid) {
+      this.formula = this.math.value;
+    }
+  }
 }
 
