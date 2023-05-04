@@ -2,6 +2,7 @@ public class TaskTwo {
     public static void main(String[] args) {
 
         //      Дано пятизначное натуральное число. Узнать, есть ли в записи числа одинаковые цифры.
+
         System.out.println("Task 2");
 
         int num = 12345;

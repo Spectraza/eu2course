@@ -2,8 +2,8 @@ public class Main {
     public static void main(String[] args) {
 
         //        Дано пятизначное натуральное число. Определить является, ли это число палиндромом.
-        System.out.println("Task 1");
 
+        System.out.println("Task 1");
         int number = 33333;
         int n = 0;
         int utNum = number;

@@ -1,13 +1,14 @@
 public class TaskThree {
     public static void main(String[] args) {
+
+        // Дано четырехзначное натуральное  число. Определить содержит, ли число ровно три одинаковые цифры.
+
         System.out.println("Task 3");
         int inputThree = 2224;
         boolean resultThree = hasThreeSame(inputThree);
         System.out.println(resultThree);
 
     }
-
-    // Дано четырехзначное натуральное  число. Определить содержит, ли число ровно три одинаковые цифры.
 
     public static boolean hasThreeSame(int number) {
         for (int i = 0; i < 5; i++) {
