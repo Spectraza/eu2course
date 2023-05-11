@@ -1,5 +1,5 @@
-#ifndef SAVYCH_221_2_PR8_TRAIN_H
-#define SAVYCH_221_2_PR8_TRAIN_H
+#ifndef SAVYCH_221_2_PR2_TRAIN_H
+#define SAVYCH_221_2_PR2_TRAIN_H
 #include <string> //підключення бібліотеки
 
 class Train { //це класс поїзда, який ми створили
@@ -18,4 +18,4 @@ public://публічні дані
     Train(std::string name, int trainNumber, time_t departureTime); //створюємо змінні для поїзду
 };
 
-#endif //SAVYCH_221_2_PR8_TRAIN_H
+#endif //SAVYCH_221_2_PR2_TRAIN_H
