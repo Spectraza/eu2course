@@ -1,9 +1,10 @@
 import java.util.Arrays;
 
+//  Удалить в массиве все числа, которые повторяются более двух раз.
+
 public class Main {
     public static void main(String[] args) {
 
-//  Удалить в массиве все числа, которые повторяются более двух раз.
         int[] numOne = new int[]{5, 6, 5, 4, 3, 5};
         boolean[] whatToKeep = new boolean[numOne.length];
         int newLength = 0;
