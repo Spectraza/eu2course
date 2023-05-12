@@ -11,6 +11,7 @@ public class TaskThree {
                 sum += nums[i];
             }
         }
+
         System.out.println(sum);
     }
 }

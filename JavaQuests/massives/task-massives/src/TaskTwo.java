@@ -10,16 +10,16 @@ public class TaskTwo {
         int greatestOdd = 0;
 
         for (int i = 0; i < num.length; i++) {
-            if (num[i] % 2 == 1 && num[i] > num[greatestOdd]){
+            if (num[i] % 2 == 1 && num[i] > num[greatestOdd]) {
                 greatestOdd = i;
             }
         }
 
         for (int i = 0; i < num.length; i++) {
-            if (i < greatestOdd){
+            if (i < greatestOdd) {
                 num[i] >>= 1;
             }
-            if (i > greatestOdd){
+            if (i > greatestOdd) {
                 num[i] <<= 3;
             }
         }
