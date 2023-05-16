@@ -11,13 +11,13 @@ public class Main {
         boolean condition1 = true;
         boolean condition2 = true;
 
-        if (condition1) {
-            System.out.println("Condition 1 is true!");
-        } else if (condition2) {
-            System.out.println("Condition 1 should be false but condition 2 is true");
-        } else {
-            System.out.println("Everything is false");
-        }
+//        if (condition1) {
+//            System.out.println("Condition 1 is true!");
+//        } else if (condition2) {
+//            System.out.println("Condition 1 should be false but condition 2 is true");
+//        } else {
+//            System.out.println("Everything is false");
+//        }
 
 //        3 циклы
         int a = 0;

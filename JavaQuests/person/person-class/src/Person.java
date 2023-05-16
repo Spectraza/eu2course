@@ -1,16 +1,14 @@
 public class Person {
     //    5 поля
-    public int katya;
 
     private String name = "Lera";
 
-    private final int number;
+    private final int age;
 
     //    6 конструктор
-    public Person(int number)
+    public Person(int age)
     {
-        this.number = number;
-        this.katya = 5;
+        this.age = age;
         System.out.println("Creating person");
     }
 }
