@@ -1,14 +1,21 @@
 public class Person {
-    //    5 поля
+    private String fullName;
+    private int age;
 
-    private String name = "Lera";
-
-    private final int age;
-
-    //    6 конструктор
-    public Person(int age)
-    {
-        this.age = age;
-        System.out.println("Creating person");
+    public Person() {
     }
+
+    public Person(String fullName, int age) {
+        this.fullName = fullName;
+        this.age = age;
+    }
+
+    public void move() {
+        System.out.println(fullName + " moves.");
+    }
+
+    public void talk() {
+        System.out.println(fullName + " talks.");
+    }
+
 }

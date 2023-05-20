@@ -1,48 +1,19 @@
-import java.util.Arrays;
+
+// Создать класс Person, который содержит: переменные fullName, age;методы move() и talk(),
+// в которых просто вывести на консоль сообщение -"Такой-то  Person говорит". Добавьте два
+// конструктора  - Person() и Person(fullName, age).Создайте два объекта этого класса.
+// Один объект инициализируется конструктором Person(), другой - Person(fullName, age).
+// Вызовите методы move() и talk().
 
 public class Main {
-    public static void main(String[] args) {
-//        1 Создание переменных
-        int name = 5;
-        double e = 2.7;
-        String wow = "WorldOfWarcraft";
+    public static void main(String[] args)
+    {
+        Person person1 = new Person("Sans", 19);
+        person1.move();
+        person1.talk();
 
-//        2 ифы
-        boolean condition1 = true;
-        boolean condition2 = true;
-
-//        if (condition1) {
-//            System.out.println("Condition 1 is true!");
-//        } else if (condition2) {
-//            System.out.println("Condition 1 should be false but condition 2 is true");
-//        } else {
-//            System.out.println("Everything is false");
-//        }
-
-//        3 циклы
-        int a = 0;
-
-
-//        вызовы функций
-        Main main = new Main();
-
-        main.sayHi();
-
-        main.greet("Lera");
-
-        System.out.println(main.add(2, 2));
-    }
-
-    //    4 функции
-    private void sayHi() {
-        System.out.println("Hi");
-    }
-
-    private void greet(String name) {
-        System.out.println("Hello, " + name);
-    }
-
-    private int add(int a, int b) {
-        return a + b;
+        Person person2 = new Person("Frisk", 19);
+        person2.move();
+        person2.talk();
     }
 }
