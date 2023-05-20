@@ -6,8 +6,7 @@
 // Вызовите методы move() и talk().
 
 public class Main {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Person person1 = new Person("Sans", 19);
         person1.move();
         person1.talk();
