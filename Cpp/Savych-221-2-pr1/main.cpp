@@ -114,18 +114,4 @@ int main() {
     }
     ");
 }
-//int main() {
-//    int size = getSize(); //змінна, в якій визимаємо функцію розмір
-//
-//    Train **trains = getTrains(size); //визиваємо класс
-//
-//    bool *goodTrains = trainsAfterDate(trains, size); //змінна
-//
-//    for (int i = 0; i < size; ++i) { //створюєм цикл, що перевіряє який нам поїзд підходить
-//        if (goodTrains[i]) { //якщо підходить, виводимо його, якщо ні, перевіряємо ще раз
-//            printTrain(trains[i]);
-//        }
-//    }
-//
-//    return 0; //повертаємо 0
-//}
+                                                 
