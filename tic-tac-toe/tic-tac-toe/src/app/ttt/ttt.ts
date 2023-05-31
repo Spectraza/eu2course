@@ -5,6 +5,7 @@ export type Move = { row: number; col: number };
 export class TicTacToe {
   currentPlayer: Player = 'X';
   board: Board;
+  memo: Map<string, number> = new Map();
 
   constructor() {
     this.board = [];
@@ -12,7 +13,7 @@ export class TicTacToe {
   }
 
   public resetBoard() {
-    this.board = Array.from({length: 3}, () => new Array(3).fill(''));
+    this.board = Array.from({ length: 3 }, () => new Array(3).fill(''));
     this.currentPlayer = 'X';
   }
 
@@ -101,13 +102,29 @@ export class TicTacToe {
     return null;
   }
 
+  public getAllMoves(board: Board): Move[] {
+
+
+    let moves: Move[] = [];
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] == '') {
+          moves.push({ row: i, col: j });
+        }
+      }
+    }
+
+    return moves;
+  }
+
   public aiMove() {
     let moves = this.getAllMoves(this.board);
     let grades = [];
 
     for (const move of moves) {
       grades.push(
-        this.minimax(structuredClone(this.board), this.currentPlayer, move)
+        this.minimax(structuredClone(this.board), this.currentPlayer, move, this.memo)
       );
     }
 
@@ -125,7 +142,7 @@ export class TicTacToe {
     this.playMove(moves[randomIndex]);
   }
 
-  public minimax(board: Board, player: Player, move: Move): number {
+  public minimax(board: Board, player: Player, move: Move, memo: Map<string, number> = new Map()): number {
     board[move.row][move.col] = player;
 
     const winner = this.checkWinner(board);
@@ -144,15 +161,22 @@ export class TicTacToe {
       }
     }
 
+    // Convert the board to a string representation that can be used as a key in the memo map.
+    const boardKey = JSON.stringify({ board, player });
+
+    // If the board state has been calculated before, return the memoized value.
+    if (memo.has(boardKey)) {
+      return <number>memo.get(boardKey);
+    }
+
     const moves = this.getAllMoves(board);
-
     let opponent: Player = player == 'X' ? 'O' : 'X';
-
     let grades: number[] = [];
 
     for (const move of moves) {
-      grades.push(this.minimax(structuredClone(board), opponent, move));
+      grades.push(this.minimax(structuredClone(board), opponent, move, memo));
     }
+
     let max = Math.max(...grades);
     let result = max;
 
@@ -162,20 +186,13 @@ export class TicTacToe {
       }
     }
 
-    return -result;
+    result = -result;
+
+    // Store the result in the memo map before returning it.
+    memo.set(boardKey, result);
+
+    return result;
   }
 
-  public getAllMoves(board: Board): Move[] {
-    let moves: Move[] = [];
 
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[i][j] == '') {
-          moves.push({row: i, col: j});
-        }
-      }
-    }
-
-    return moves;
-  }
 }
