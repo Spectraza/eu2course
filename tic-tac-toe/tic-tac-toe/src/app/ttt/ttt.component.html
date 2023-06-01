@@ -12,7 +12,8 @@
 <button mat-button [disabled]="this.ttt.checkWinner(this.ttt.board) != null" color="primary"
         (click)="this.ttt.aiMove()">Ai
 </button>
-<p *ngIf="this.ttt.checkWinner(this.ttt.board)">{{this.ttt.checkWinner(this.ttt.board)}} wins!</p>
 <p>X wins: {{xWins}}</p>
 <p>O wins: {{oWins}}</p>
 <p>Draws: {{draws}}</p>
+
+<p *ngIf="this.ttt.checkWinner(this.ttt.board)">{{this.ttt.checkWinner(this.ttt.board)}} wins!</p>
