@@ -161,10 +161,8 @@ export class TicTacToe {
       }
     }
 
-    // Convert the board to a string representation that can be used as a key in the memo map.
     const boardKey = JSON.stringify({ board, player });
 
-    // If the board state has been calculated before, return the memoized value.
     if (memo.has(boardKey)) {
       return <number>memo.get(boardKey);
     }
@@ -188,7 +186,6 @@ export class TicTacToe {
 
     result = -result;
 
-    // Store the result in the memo map before returning it.
     memo.set(boardKey, result);
 
     return result;
