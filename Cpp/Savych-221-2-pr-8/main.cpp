@@ -31,8 +31,7 @@ std::string findTopScorers(const std::string& filename) {
 
 
 int main() {
-    std::string filePath = "\\\\wsl.localhost\\Ubuntu\\home\\lera\\projects\\eu2course\\Cpp\\Savych-221-2-pr-8\test.json";
+    std::string filePath = "/home/lera/projects/eu2course/Cpp/Savych-221-2-pr-8/test.json";
     std::cout << findTopScorers(filePath);
-
     return 0;
 }
