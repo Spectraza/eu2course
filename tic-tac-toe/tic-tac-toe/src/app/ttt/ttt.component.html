@@ -1,1 +1,19 @@
-<p>{{this.ttt.board | json}}</p>
+<div *ngFor="let i of [0, 1, 2]">
+  <button mat-icon-button *ngFor="let j of [0, 1, 2]"
+          [disabled]="!!ttt.board[i][j] || !!this.ttt.checkWinner(this.ttt.board)" (click)="playMove(i, j)">
+    <mat-icon>{{icons[ttt.board[i][j] ? ttt.board[i][j]! : '']}}</mat-icon>
+  </button>
+</div>
+
+<button mat-button color="warn"
+        (click)="this.reset()">Reset
+</button>
+
+<button mat-button [disabled]="this.ttt.checkWinner(this.ttt.board) != null" color="primary"
+        (click)="this.ttt.aiMove()">Ai
+</button>
+<p>X wins: {{xWins}}</p>
+<p>O wins: {{oWins}}</p>
+<p>Draws: {{draws}}</p>
+
+<p *ngIf="this.ttt.checkWinner(this.ttt.board)">{{this.ttt.checkWinner(this.ttt.board)}} wins!</p>

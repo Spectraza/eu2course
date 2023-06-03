@@ -1,122 +1,195 @@
-type Player = 'X' | 'O';
-type Board = (Player | null)[][];
-type Move = { row: number; col: number; };
+export type Player = 'X' | 'O';
+export type Board = (Player | '')[][];
+export type Move = { row: number; col: number };
 
-class TicTacToe {
-    private currentPlayer: Player;
-    public board: Board;
+export class TicTacToe {
+  currentPlayer: Player = 'X';
+  board: Board;
+  memo: Map<string, number> = new Map();
 
-    constructor() {
-        this.currentPlayer = 'X';
-        this.board = Array(3).fill(null).map(() => Array(3).fill(null));
+  constructor() {
+    this.board = [];
+    this.resetBoard();
+  }
+
+  public resetBoard() {
+    this.board = Array.from({ length: 3 }, () => new Array(3).fill(''));
+    this.currentPlayer = 'X';
+  }
+
+  public playMove(move: Move) {
+    if (this.board[move.row][move.col] == '') {
+      this.board[move.row][move.col] = this.currentPlayer;
+      this.swapPlayer();
+    }
+  }
+
+  public swapPlayer() {
+    this.currentPlayer = this.currentPlayer == 'X' ? 'O' : 'X';
+  }
+
+  public checkWinner(board: Board): Player | '' | null {
+    // rows
+    for (const row of board) {
+      const player = row[0];
+
+      if (player == '') {
+        continue;
+      }
+
+      let isWin: boolean = true;
+      for (const cell of row) {
+        if (player != cell) {
+          isWin = false;
+          break;
+        }
+      }
+
+      if (isWin) {
+        return player;
+      }
     }
 
-    getCurrentBoard(): Board {
-        return this.board;
+    // columns
+    for (let i = 0; i < 3; i++) {
+      const player = board[0][i];
+      if (player == '') {
+        continue;
+      }
+      let isWin: boolean = true;
+      for (let j = 0; j < 3; j++) {
+        if (player != board[j][i]) {
+          isWin = false;
+          break;
+        }
+      }
+
+      if (isWin) {
+        return player;
+      }
     }
 
-    playMoveByPlayer(move: Move): void {
-        if (this.board[move.row][move.col] === null) {
-            this.board[move.row][move.col] = this.currentPlayer;
-            this.swapPlayer();
+    // diags
+    const player = board[1][1];
+
+    let isWin: boolean = true;
+    if (player != '') {
+      for (let i = 0; i < 3; i++) {
+        if (player != board[i][i]) {
+          isWin = false;
+          break;
         }
+      }
+      if (isWin) {
+        return player;
+      }
+      isWin = true;
+      for (let i = 0; i < 3; i++) {
+        if (player != board[2 - i][i]) {
+          isWin = false;
+          break;
+        }
+      }
+      if (isWin) {
+        return player;
+      }
     }
 
-    swapPlayer(): void {
-        this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+    if (this.getAllMoves(board).length == 0) {
+      return '';
     }
 
-    playMoveByAI(): void {
-        let bestScore = -Infinity;
-        let move: Move = { row: -1, col: -1 };
+    return null;
+  }
 
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (this.board[i][j] === null) {
-                    this.board[i][j] = this.currentPlayer;
-                    let score = this.minimax(this.board, false);
-                    this.board[i][j] = null;
-                    if (score > bestScore) {
-                        bestScore = score;
-                        move = { row: i, col: j };
-                    }
-                }
-            }
-        }
+  public getAllMoves(board: Board): Move[] {
 
-        if (move.row !== -1 && move.col !== -1) {
-            this.board[move.row][move.col] = this.currentPlayer;
-            this.swapPlayer();
+
+    let moves: Move[] = [];
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] == '') {
+          moves.push({ row: i, col: j });
         }
+      }
     }
 
-    private minimax(board: Board, isMaximizing: boolean): number {
-        let result = this.checkWinner();
-        if (result !== null) {
-            return this.score(result);
-        }
+    return moves;
+  }
 
-        if (isMaximizing) {
-            let bestScore = -Infinity;
-            for (let i = 0; i < 3; i++) {
-                for (let j = 0; j < 3; j++) {
-                    if (board[i][j] === null) {
-                        board[i][j] = this.currentPlayer;
-                        let score = this.minimax(board, false);
-                        board[i][j] = null;
-                        bestScore = Math.max(score, bestScore);
-                    }
-                }
-            }
-            return bestScore;
-        } else {
-            let bestScore = Infinity;
-            for (let i = 0; i < 3; i++) {
-                for (let j = 0; j < 3; j++) {
-                    if (board[i][j] === null) {
-                        board[i][j] = this.currentPlayer === 'X' ? 'O' : 'X';
-                        let score = this.minimax(board, true);
-                        board[i][j] = null;
-                        bestScore = Math.min(score, bestScore);
-                    }
-                }
-            }
-            return bestScore;
-        }
+  public aiMove() {
+    let moves = this.getAllMoves(this.board);
+    let grades = [];
+
+    for (const move of moves) {
+      grades.push(
+        this.minimax(structuredClone(this.board), this.currentPlayer, move, this.memo)
+      );
     }
 
-    private checkWinner(): Player | null {
-        // Check rows, columns and diagonals
-        for (let i = 0; i < 3; i++) {
-            if (this.board[i][0] !== null && this.board[i][0] === this.board[i][1] && this.board[i][0] === this.board[i][2]) {
-                return this.board[i][0];
-            }
-            if (this.board[0][i] !== null && this.board[0][i] === this.board[1][i] && this.board[0][i] === this.board[2][i]) {
-                return this.board[0][i];
-            }
-        }
-        if (this.board[0][0] !== null && this.board[0][0] === this.board[1][1] && this.board[0][0] === this.board[2][2]) {
-            return this.board[0][0];
-        }
-        if (this.board[0][2] !== null && this.board[0][2] === this.board[1][1] && this.board[0][2] === this.board[2][0]) {
-            return this.board[0][2];
-        }
+    const max = Math.max(...grades);
+    const indexes: number[] = [];
 
-        // If there are no more null values, it's a tie
-        if (!this.board.flat().includes(null)) {
-            return 'X';
-        }
+    grades.forEach((value, index) => {
+      if (value === max) {
+        indexes.push(index);
+      }
+    });
 
-        return null;
+    const randomIndex = indexes[Math.floor(Math.random() * indexes.length)];
+
+    this.playMove(moves[randomIndex]);
+  }
+
+  public minimax(board: Board, player: Player, move: Move, memo: Map<string, number> = new Map()): number {
+    board[move.row][move.col] = player;
+
+    const winner = this.checkWinner(board);
+
+    if (winner != null) {
+      if (winner == player) {
+        return 100;
+      }
+
+      if (winner == '') {
+        return 0;
+      }
+
+      if (winner != player) {
+        return -100;
+      }
     }
 
-    private score(winner: Player): number {
-        if (winner === this.currentPlayer) {
-            return 1;
-        } else if (winner === (this.currentPlayer === 'X' ? 'O' : 'X')) {
-            return -1;
-        } else {
-            return 0;
-        }
+    const boardKey = JSON.stringify({ board, player });
+
+    if (memo.has(boardKey)) {
+      return <number>memo.get(boardKey);
     }
+
+    const moves = this.getAllMoves(board);
+    let opponent: Player = player == 'X' ? 'O' : 'X';
+    let grades: number[] = [];
+
+    for (const move of moves) {
+      grades.push(this.minimax(structuredClone(board), opponent, move, memo));
+    }
+
+    let max = Math.max(...grades);
+    let result = max;
+
+    for (const grade of grades) {
+      if (grade == max) {
+        result += max;
+      }
+    }
+
+    result = -result;
+
+    memo.set(boardKey, result);
+
+    return result;
+  }
+
+
 }
